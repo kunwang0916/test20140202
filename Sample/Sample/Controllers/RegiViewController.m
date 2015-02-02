@@ -43,6 +43,8 @@
     [record dummyData];
     [DataBase insertRecord: record];
 
+    
+    [record functionTest];
 }
 
 - (IBAction)exportButtonClicked:(id)sender
@@ -81,12 +83,15 @@
         //can have special characters
         characSet =  [NSMutableCharacterSet alphanumericCharacterSet];
         [characSet formUnionWithCharacterSet: [NSCharacterSet symbolCharacterSet]];
+        [characSet formUnionWithCharacterSet: [NSCharacterSet controlCharacterSet]];
+        [characSet formUnionWithCharacterSet: [NSCharacterSet punctuationCharacterSet]];
+        [characSet formUnionWithCharacterSet: [NSCharacterSet nonBaseCharacterSet]];
+        [characSet formUnionWithCharacterSet: [NSCharacterSet decomposableCharacterSet]];
     }
     else if([textField isEqual:_universityField])
     {
         //Alphabetic Characters
         characSet =  [NSMutableCharacterSet letterCharacterSet];
-        [characSet formUnionWithCharacterSet:[NSCharacterSet uppercaseLetterCharacterSet]];
     }
     else if([textField isEqual:_birthdayField])
     {

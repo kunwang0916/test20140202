@@ -24,4 +24,41 @@
     self.postion_y = @"200",
     self.t_delay_press_character = @"11";
 }
+
+- (int)intValumeFromCharacter:(unichar)character
+{
+    character = character - 'A' + 1;
+    NSNumber *number = [NSNumber numberWithUnsignedChar:character] ;
+    return [number intValue];
+}
+
+- (int)characterType:(unichar)character
+{
+    if ([[NSMutableCharacterSet letterCharacterSet] characterIsMember:character])
+    {
+        //alphabet
+        return 1;
+    }
+    else if ([[NSMutableCharacterSet decimalDigitCharacterSet] characterIsMember:character])
+    {
+        //number
+        return 2;
+    }
+    else
+    {
+        //specail
+        return 3;
+    }
+}
+
+- (void)functionTest
+{
+    NSString *string = @"123EEFDaa%^#eqwe!#!@$#$^%^*&(XZXZCDwaqw[]}";
+    
+    for (int i = 0; i < [string length]; i++)
+    {
+        unichar character = [string characterAtIndex:i];
+        NSLog(@"charac: %c : type: %d, id: %d",character, [self characterType:character], [self intValumeFromCharacter:character]);
+    }
+}
 @end

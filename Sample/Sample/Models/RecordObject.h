@@ -25,4 +25,8 @@
 
 - (void)dummyData;
 
+- (int)intValumeFromCharacter:(unichar)character;
+- (int)characterType:(unichar)character;
+- (void)functionTest;
+
 @end

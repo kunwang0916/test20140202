@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA0DFFF01A809B6800825AC7 /* TouchWatchApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0DFFEF1A809B6800825AC7 /* TouchWatchApplication.m */; };
 		EAACF36B1A7F10C50074EA5C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EAACF36A1A7F10C50074EA5C /* main.m */; };
 		EAACF36E1A7F10C50074EA5C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EAACF36D1A7F10C50074EA5C /* AppDelegate.m */; };
 		EAACF37A1A7F10C50074EA5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAACF3781A7F10C50074EA5C /* Main.storyboard */; };
@@ -40,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EA0DFFEE1A809B6800825AC7 /* TouchWatchApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchWatchApplication.h; sourceTree = "<group>"; };
+		EA0DFFEF1A809B6800825AC7 /* TouchWatchApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchWatchApplication.m; sourceTree = "<group>"; };
 		EAACF3651A7F10C50074EA5C /* Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAACF3691A7F10C50074EA5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAACF36A1A7F10C50074EA5C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -231,6 +234,8 @@
 		EAACF3BF1A7F4B090074EA5C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EA0DFFEE1A809B6800825AC7 /* TouchWatchApplication.h */,
+				EA0DFFEF1A809B6800825AC7 /* TouchWatchApplication.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -342,6 +347,7 @@
 				EAACF3D41A7F5E1D0074EA5C /* DataViewController.m in Sources */,
 				EAACF3C31A7F4B090074EA5C /* RootViewController.m in Sources */,
 				EAACF36E1A7F10C50074EA5C /* AppDelegate.m in Sources */,
+				EA0DFFF01A809B6800825AC7 /* TouchWatchApplication.m in Sources */,
 				EAACF3AE1A7F46A20074EA5C /* FMDatabaseQueue.m in Sources */,
 				EAACF3CA1A7F4F370074EA5C /* RecordObject.m in Sources */,
 				EAACF3C21A7F4B090074EA5C /* RegiViewController.m in Sources */,
@@ -540,6 +546,7 @@
 				EAACF3901A7F10C50074EA5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EAACF3911A7F10C50074EA5C /* Build configuration list for PBXNativeTarget "SampleTests" */ = {
 			isa = XCConfigurationList;
@@ -548,6 +555,7 @@
 				EAACF3931A7F10C50074EA5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -15,4 +15,7 @@
 
 #define kDataBaseInitSqlite   @"CREATE TABLE IF NOT EXISTS \"record\" (\"id\" integer NOT NULL PRIMARY KEY AUTOINCREMENT,\"user_id\" integer NOT NULL DEFAULT 0,\"user_name\" text DEFAULT NULL,\"character_id\" integer NOT NULL,\"character_type\" integer NOT NULL,\"time_lp_on_character\" integer NOT NULL,\"time_lp_press\" integer NOT NULL,\"pressue_applied\" integer NOT NULL,\"position_x\" integer NOT NULL DEFAULT 0,\"postion_y\" integer NOT NULL DEFAULT 0,\"t_delay_press_character\" integer NOT NULL DEFAULT 0);"
 
+
+#define kTouchEndInKeyboardNoti @"touch_end_in_keyboard"
+
 #endif

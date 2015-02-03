@@ -12,6 +12,9 @@
 #import "AppDefine.h"
 
 @interface AppDelegate ()
+{
+    NSTimeInterval lastTouchStartTimeStamp;
+}
 
 @end
 
@@ -45,6 +48,39 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Custom AppDelegate
+- (void)application:(TouchWatchApplication *)application willSendTouchEvent:(UIEvent *)event
+{
+    NSSet* allTouches = [event allTouches];
+    UITouch* touch = [allTouches anyObject];
+    UIView* touchView = [touch view];
+
+    if( [NSStringFromClass([touchView class]) isEqualToString:@"UIKeyboardLayoutStar"] )
+    {
+        //touch event in keyboard
+        if (touch.phase == UITouchPhaseBegan)
+        {
+            lastTouchStartTimeStamp = touch.timestamp;
+        }
+        if (touch.phase == UITouchPhaseEnded)
+        {
+            NSTimeInterval nowTimeStamp = touch.timestamp;
+            NSNumber *touchDuration = [NSNumber numberWithDouble: ((nowTimeStamp - lastTouchStartTimeStamp) * 1000)];
+            NSNumber *touchPressure = [NSNumber numberWithDouble: touch.majorRadius];
+            CGPoint touchPoint = [touch locationInView: self.window];
+            NSLog(@"touchDuration: %d, touchPressure: %lf, position: %@",[touchDuration intValue], [touchPressure doubleValue], NSStringFromCGPoint(touchPoint));
+            
+            NSDictionary *touchInfoDic = @{@"duration" : touchDuration,
+                                           @"press" : touchPressure,
+                                           @"point" : NSStringFromCGPoint(touchPoint)};
+            
+            NSNotification *n = [NSNotification notificationWithName:kTouchEndInKeyboardNoti object:self userInfo:touchInfoDic];
+            [[NSNotificationCenter defaultCenter] postNotification:n];
+
+        }
+    }
 }
 
 

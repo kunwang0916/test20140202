@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TouchWatchApplication.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <TouchWatchApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

@@ -8,9 +8,12 @@
 
 #import "RegiViewController.h"
 #import "Database.h"
+#import "AppDefine.h"
 
 @interface RegiViewController ()
 {
+    NSTimeInterval lastCharacterInputTimeStamp;
+    RecordObject* lastTouchRecord;
 }
 @end
 
@@ -20,6 +23,28 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.dataObject = [NSNumber numberWithInt:1];
+    lastCharacterInputTimeStamp = 0;
+    lastTouchRecord = [[RecordObject alloc] init];
+    [lastTouchRecord dummyData];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(keyboardTouchEnd:) name:kTouchEndInKeyboardNoti object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kTouchEndInKeyboardNoti object:nil];
+}
+
+- (void) dealloc
+{
+   [[NSNotificationCenter defaultCenter] removeObserver:self name:kTouchEndInKeyboardNoti object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -132,6 +157,7 @@
     if ([rangeSet isSupersetOfSet: myStringSet])
     {
         [self saveInputString:string];
+        NSLog(@"input string:%@", string);
         return YES;
     }
     else
@@ -140,6 +166,19 @@
     }
 }
 
+#pragma mark - Touch In Keyboard End
+- (void)keyboardTouchEnd:(NSNotification *) notification
+{
+    NSNumber *duration = [[notification userInfo] objectForKey:@"duration"];
+    NSNumber *press= [[notification userInfo] objectForKey:@"press"];
+    NSString *pointString = [[notification userInfo] objectForKey:@"point"];
+    CGPoint point = CGPointFromString(pointString);
+    
+    lastTouchRecord.time_lp_on_character = [NSString stringWithFormat:@"%d", [duration intValue]];
+    lastTouchRecord.pressue_applied = [NSString stringWithFormat:@"%d", [press intValue]];
+    lastTouchRecord.position_x = [NSString stringWithFormat:@"%d", (int)(point.x)];
+    lastTouchRecord.postion_y = [NSString stringWithFormat:@"%d", (int)(point.y)];
+}
 
 #pragma mark - Input Records
 - (void)saveInputString:(NSString *)inputString
@@ -153,13 +192,10 @@
 
 - (void)saveInputCharacter:(unichar)inputChar
 {
-    RecordObject* record = [[RecordObject alloc] init];
-    [record dummyData];
+    lastTouchRecord.character_id = [NSString stringWithFormat:@"%d", [RecordObject intValumeFromCharacter:inputChar]];
+    lastTouchRecord.character_type = [NSString stringWithFormat:@"%d", [RecordObject characterType:inputChar]];
     
-    record.character_id = [NSString stringWithFormat:@"%d", [RecordObject intValumeFromCharacter:inputChar]];
-    record.character_type = [NSString stringWithFormat:@"%d", [RecordObject characterType:inputChar]];
-    
-    [DataBase insertRecord:record];
+    [DataBase insertRecord:lastTouchRecord];
 }
 
 @end

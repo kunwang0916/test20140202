@@ -76,11 +76,63 @@
                     <view key="view" contentMode="scaleToFill" id="dyW-Wt-JIh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKC-pK-Dht">
+                                <rect key="frame" x="256" y="52" width="89" height="30"/>
+                                <state key="normal" title="Take a photo">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="takePhotoButtonClicked:" destination="sjv-aF-cIo" eventType="touchUpInside" id="pId-Mx-t5f"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRL-0l-Ypf">
+                                <rect key="frame" x="157" y="94" width="91" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cog-Ac-IPo">
+                                <rect key="frame" x="256" y="90" width="328" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="sjv-aF-cIo" id="wW4-qB-sVJ"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VXL-31-rwg">
+                                <rect key="frame" x="272" y="128" width="57" height="30"/>
+                                <state key="normal" title="Register">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="registerButtonClicked:" destination="sjv-aF-cIo" eventType="touchUpInside" id="Es5-DX-UG6"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VXL-31-rwg" firstAttribute="centerX" secondItem="XKC-pK-Dht" secondAttribute="centerX" id="59q-ya-utM"/>
+                            <constraint firstItem="VXL-31-rwg" firstAttribute="top" secondItem="cog-Ac-IPo" secondAttribute="bottom" constant="8" symbolic="YES" id="Fri-rI-WdE"/>
+                            <constraint firstItem="XKC-pK-Dht" firstAttribute="top" secondItem="Gq0-Sw-gKp" secondAttribute="bottom" constant="32" id="Lx2-jI-OTM"/>
+                            <constraint firstItem="XKC-pK-Dht" firstAttribute="centerX" secondItem="dyW-Wt-JIh" secondAttribute="centerX" id="Uhq-VJ-iCI"/>
+                            <constraint firstItem="cog-Ac-IPo" firstAttribute="top" secondItem="XKC-pK-Dht" secondAttribute="bottom" constant="8" symbolic="YES" id="Y0G-Nw-fWp"/>
+                            <constraint firstItem="cog-Ac-IPo" firstAttribute="leading" secondItem="XKC-pK-Dht" secondAttribute="leading" id="aGm-CW-2BT"/>
+                            <constraint firstItem="cog-Ac-IPo" firstAttribute="trailing" secondItem="dyW-Wt-JIh" secondAttribute="trailingMargin" id="ljf-pZ-8To"/>
+                            <constraint firstItem="cog-Ac-IPo" firstAttribute="leading" secondItem="nRL-0l-Ypf" secondAttribute="trailing" constant="8" symbolic="YES" id="p6C-6e-lbr"/>
+                            <constraint firstItem="nRL-0l-Ypf" firstAttribute="top" secondItem="Gq0-Sw-gKp" secondAttribute="bottom" constant="74" id="wFp-Im-04C"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="regButton" destination="VXL-31-rwg" id="TLw-pk-t6E"/>
+                        <outlet property="takePhotoBtn" destination="XKC-pK-Dht" id="T1A-5c-GGa"/>
+                        <outlet property="userNameField" destination="cog-Ac-IPo" id="1HB-Xf-Za8"/>
+                        <outlet property="userNameLabel" destination="nRL-0l-Ypf" id="5CS-z5-GrH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9tG-OQ-YOW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="371" y="-217"/>
         </scene>
         <!--Regi View Controller-->
         <scene sceneID="Xem-jS-GmK">
@@ -176,11 +228,11 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Fl-D5-LhC">
-                                <rect key="frame" x="301" y="220" width="117" height="30"/>
+                                <rect key="frame" x="313" y="220" width="92" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="117" id="62y-C5-uxT"/>
                                 </constraints>
-                                <state key="normal" title="add dummy data">
+                                <state key="normal" title="Function Test">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="default">

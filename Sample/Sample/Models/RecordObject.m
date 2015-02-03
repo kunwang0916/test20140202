@@ -13,16 +13,16 @@
 - (void)dummyData
 {
     self.user_id = @"1";
-    self.user_name = @"user11";
+    self.user_name = @"user";
     self.character_id = @"1";
-    self.character_type = @"2";
+    self.character_type = @"1";
     
-    self.time_lp_on_character = @"180",
-    self.time_lp_press = @"200",
-    self.pressue_applied = @"300",
-    self.position_x = @"10",
-    self.postion_y = @"200",
-    self.t_delay_press_character = @"11";
+    self.time_lp_on_character = @"0",
+    self.time_lp_press = @"0",
+    self.pressue_applied = @"0",
+    self.position_x = @"0",
+    self.postion_y = @"0",
+    self.t_delay_press_character = @"0";
 }
 
 + (int)intValumeFromCharacter:(unichar)character

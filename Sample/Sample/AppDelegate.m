@@ -14,6 +14,7 @@
 @interface AppDelegate ()
 {
     NSTimeInterval lastTouchStartTimeStamp;
+    CGFloat lastTouchPressure;
 }
 
 @end
@@ -25,6 +26,9 @@
     // Override point for customization after application launch.
     
     [DataBase creatAllTables];
+    lastTouchStartTimeStamp = 0;
+    lastTouchPressure = 0;
+    
     return YES;
 }
 
@@ -63,12 +67,24 @@
         if (touch.phase == UITouchPhaseBegan)
         {
             lastTouchStartTimeStamp = touch.timestamp;
+            if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
+            {
+                lastTouchPressure =  touch.majorRadius;    
+            }
+            
         }
-        if (touch.phase == UITouchPhaseEnded)
+        else if (touch.phase == UITouchPhaseMoved)
+        {
+            if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
+            {
+                lastTouchPressure =  touch.majorRadius;
+            }
+        }
+        else if (touch.phase == UITouchPhaseEnded)
         {
             NSTimeInterval nowTimeStamp = touch.timestamp;
             NSNumber *touchDuration = [NSNumber numberWithDouble: ((nowTimeStamp - lastTouchStartTimeStamp) * 1000)];
-            NSNumber *touchPressure = [NSNumber numberWithDouble: touch.majorRadius];
+            NSNumber *touchPressure = [NSNumber numberWithDouble: lastTouchPressure];
             CGPoint touchPoint = [touch locationInView: self.window];
             NSLog(@"touchDuration: %d, touchPressure: %lf, position: %@",[touchDuration intValue], [touchPressure doubleValue], NSStringFromCGPoint(touchPoint));
             

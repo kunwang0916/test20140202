@@ -7,12 +7,10 @@
 //
 
 #import "WelcomeViewController.h"
+#import "AppDelegate.h"
 
 @interface WelcomeViewController ()
-{
-    UIButton *takePhotoBtn;
-    UIButton *regButton;
-    
+{    
     UIImage *pickedImage;
     NSString *userName;
 }
@@ -25,27 +23,12 @@
     [super viewDidLoad];
     
     self.dataObject = [NSNumber numberWithInt:0];
-    // Do any additional setup after loading the view.
-    
-    //Camera Button
-    takePhotoBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    takePhotoBtn.frame = CGRectMake(0, 0, 100, 30);
-    takePhotoBtn.center = self.view.center;
-    [takePhotoBtn setTitle:@"Take a Photo" forState:UIControlStateNormal];
-    [takePhotoBtn addTarget:self action:@selector(takePhotoButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:takePhotoBtn];
-    
-    regButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    regButton.frame = CGRectMake(0, 0, 100, 30);
-    regButton.center = self.view.center;
-    [regButton setTitle:@"Register" forState:UIControlStateNormal];
-    [regButton addTarget:self action:@selector(registerButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:takePhotoBtn];
-    
+    // Do any additional setup after loading the view    
 }
-
-- (void)takePhotoButtonClicked
+#pragma mark - IBAction Methods
+- (IBAction)takePhotoButtonClicked:(id)sender
 {
+    [self setEditing:NO];
     [UIAlertController showActionSheetInViewController:self
                                              withTitle:@"Choose Pic Source"
                                                message:@""
@@ -64,6 +47,11 @@
             [self showImagePickerBySourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
         }
     }];
+}
+
+- (IBAction)registerButtonClicked:(id)sender
+{
+    ((AppDelegate *)([UIApplication sharedApplication].delegate)).userName = [_userNameField text];
 }
 
 - (void)showImagePickerBySourceType:(UIImagePickerControllerSourceType) sourceType
@@ -90,7 +78,7 @@
                                             }];
     }
 }
-
+#pragma mark - UIImagePickerController Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
@@ -106,11 +94,13 @@
     }];
 }
 
-
-- (void)registerButtonClicked
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidEndEditing:(UITextField *)textField;
 {
-    
+    ((AppDelegate *)([UIApplication sharedApplication].delegate)).userName = [textField text];
 }
+
+#pragma mark - Class Methods
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

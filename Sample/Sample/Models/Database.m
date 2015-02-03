@@ -106,9 +106,25 @@
         }
         
         NSMutableString *writeString = [NSMutableString string];
-        
+        BOOL ifOutputKeys = FALSE;
         while([results next]) {
             NSDictionary *resultDic = [results resultDictionary];
+            
+            if (ifOutputKeys == FALSE)
+            {
+                //output keys, in first line
+                NSArray *keys = [resultDic allKeys];
+                NSMutableString *stringForKey = [NSMutableString string];
+                for (NSString *key in keys)
+                {
+                    [stringForKey appendFormat:@"%@, ",key];
+                }
+                [stringForKey appendString:@"\n"];
+                [writeString appendString:stringForKey];
+                
+                ifOutputKeys = TRUE;
+            }
+            
             NSArray *values = [resultDic allValues];
             
             NSMutableString *strFromColumn = [NSMutableString string];

@@ -9,6 +9,7 @@
 #import "RegiViewController.h"
 #import "Database.h"
 #import "AppDefine.h"
+#import "AppDelegate.h"
 
 @interface RegiViewController ()
 {
@@ -64,12 +65,7 @@
 #pragma mark - Touch Event
 - (IBAction)doneButtonClicked:(id)sender
 {
-    RecordObject *record = [[RecordObject alloc] init];
-    [record dummyData];
-    [DataBase insertRecord: record];
-
-    
-    [record functionTest];
+    [lastTouchRecord functionTest];
 }
 
 - (IBAction)exportButtonClicked:(id)sender
@@ -91,7 +87,11 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField;
 {
-
+    if ([textField isEqual:_nameField])
+    {
+        ((AppDelegate *)([UIApplication sharedApplication].delegate)).userName = _nameField.text;
+        lastTouchRecord.user_name = _nameField.text;
+    }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

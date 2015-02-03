@@ -127,17 +127,39 @@
 #pragma mark - NSString Check
 - (BOOL)checkIfString:(NSString *)string inCharacterSet:(NSCharacterSet *)rangeSet
 {
-//    NSCharacterSet *rangeSet = [NSCharacterSet decimalDigitCharacterSet];
     NSCharacterSet *myStringSet = [NSCharacterSet characterSetWithCharactersInString:string];
     
     if ([rangeSet isSupersetOfSet: myStringSet])
     {
+        [self saveInputString:string];
         return YES;
     }
     else
     {
         return NO;
     }
+}
+
+
+#pragma mark - Input Records
+- (void)saveInputString:(NSString *)inputString
+{
+    for (int i = 0; i < [inputString length]; i++)
+    {
+        unichar inputChar = [inputString characterAtIndex:i];
+        [self saveInputCharacter:inputChar];
+    }
+}
+
+- (void)saveInputCharacter:(unichar)inputChar
+{
+    RecordObject* record = [[RecordObject alloc] init];
+    [record dummyData];
+    
+    record.character_id = [NSString stringWithFormat:@"%d", [RecordObject intValumeFromCharacter:inputChar]];
+    record.character_type = [NSString stringWithFormat:@"%d", [RecordObject characterType:inputChar]];
+    
+    [DataBase insertRecord:record];
 }
 
 @end

@@ -122,6 +122,8 @@
             [writeString appendString:strFromColumn];
         }
         
+        NSLog(@"%@", writeString);
+        
         NSFileHandle *handle = [NSFileHandle fileHandleForWritingAtPath:csvFilePath];
         //say to handle where's the file fo write
         [handle truncateFileAtOffset:[handle seekToEndOfFile]];

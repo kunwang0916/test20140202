@@ -25,14 +25,14 @@
     self.t_delay_press_character = @"11";
 }
 
-- (int)intValumeFromCharacter:(unichar)character
++ (int)intValumeFromCharacter:(unichar)character
 {
     character = character - 'A' + 1;
     NSNumber *number = [NSNumber numberWithUnsignedChar:character] ;
     return [number intValue];
 }
 
-- (int)characterType:(unichar)character
++ (int)characterType:(unichar)character
 {
     if ([[NSMutableCharacterSet letterCharacterSet] characterIsMember:character])
     {
@@ -58,7 +58,7 @@
     for (int i = 0; i < [string length]; i++)
     {
         unichar character = [string characterAtIndex:i];
-        NSLog(@"charac: %c : type: %d, id: %d",character, [self characterType:character], [self intValumeFromCharacter:character]);
+        NSLog(@"charac: %c : type: %d, id: %d",character, [RecordObject characterType:character], [RecordObject intValumeFromCharacter:character]);
     }
 }
 @end
